@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "reflect-metadata": "^0.1.13",
-    "zeebe-node": "^8.1.0"
+    "zeebe-node": "^8.1.2"
   },
   "devDependencies": {
     "@types/jest": "^29.2.0",
