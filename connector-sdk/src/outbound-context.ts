@@ -1,9 +1,8 @@
 import * as ZB from "zeebe-node";
 import { JSONDoc } from "zeebe-node";
-import { EnvironmentSecretStore, isSecret } from "./secret";
+import { EnvironmentSecretStore, isSecret, ReplaceSecretImplementation } from "./secret";
 import { getRequiredKeys } from "./validation";
 
-type ReplaceSecretImplementation = (key: string) => string | undefined;
 
 export function createOutboundConnectorContext() {
     return new OutboundConnectorContext({job: {variables: {}} as any})
