@@ -12,7 +12,7 @@ class Data {
     type: "io.camunda:connector-1",
     inputVariables: ["auth", "lat", "long", "mightbe"]
 })
-class myFunction implements OutboundConnectorFunction {
+class MyFunction implements OutboundConnectorFunction {
     execute(context: OutboundConnectorContext) {
         const vars = context.getVariablesAsType(Data)
         context.validate(vars)
