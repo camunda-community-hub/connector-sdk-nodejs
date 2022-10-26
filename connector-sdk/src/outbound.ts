@@ -32,7 +32,7 @@ export abstract class OutboundConnectorFunction {
 export function getOutboundConnectorDescription(connector: Function): OutboundConnectorDefinition {
     const name = Reflect.getMetadata(metadata.name, connector)
     const type = Reflect.getMetadata(metadata.type, connector)
-    const inputVariables = Reflect.getMetadata(metadata.inputVariables, connector)
+    const inputVariables = (Reflect.getMetadata(metadata.inputVariables, connector) || '').split(',').filter((k: string) => k !== '')
     return {
         name,
         type,

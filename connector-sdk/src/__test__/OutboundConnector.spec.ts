@@ -22,9 +22,34 @@ class MyFunction implements OutboundConnectorFunction {
     }
 }
 
+@OutboundConnector({
+    name: "Test Connector",
+    type: "io.camunda:connector-1",
+})
+class MyNoVarsFunction implements OutboundConnectorFunction {
+    execute(context: OutboundConnectorContext) {
+        const vars = context.getVariablesAsType(Data)
+        context.validate(vars)
+        return { vars }
+    }
+}
+
 test('getOutboundConnectorDescription correctly retrieves Connector metadata', () => {
     const md = getOutboundConnectorDescription(MyFunction)
     expect(md.name).toEqual('Test Connector')
     expect(md.type).toEqual('io.camunda:connector-1')
-    expect(md.inputVariables).toEqual('auth,lat,long,mightbe')
+    expect(Array.isArray(md.inputVariables)).toBe(true)
+    expect(md.inputVariables?.length).toBe(4)
+    expect(md.inputVariables?.includes('auth')).toBe(true)
+    expect(md.inputVariables?.includes('lat')).toBe(true)
+    expect(md.inputVariables?.includes('long')).toBe(true)
+    expect(md.inputVariables?.includes('mightbe')).toBe(true)
+})
+
+test('getOutboundConnectorDescription returns array when ', () => {
+    const md = getOutboundConnectorDescription(MyNoVarsFunction)
+    expect(md.name).toEqual('Test Connector')
+    expect(md.type).toEqual('io.camunda:connector-1')
+    expect(Array.isArray(md.inputVariables)).toBe(true)
+    expect(md.inputVariables?.length).toBe(0)
 })
