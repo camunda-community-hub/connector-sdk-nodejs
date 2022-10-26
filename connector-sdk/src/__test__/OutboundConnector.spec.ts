@@ -25,6 +25,7 @@ class MyFunction implements OutboundConnectorFunction {
 @OutboundConnector({
     name: "Test Connector",
     type: "io.camunda:connector-1",
+    inputVariables: []
 })
 class MyNoVarsFunction implements OutboundConnectorFunction {
     execute(context: OutboundConnectorContext) {

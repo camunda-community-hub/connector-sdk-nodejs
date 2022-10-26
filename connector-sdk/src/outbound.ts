@@ -4,7 +4,7 @@ import { OutboundConnectorContext } from "./outbound-context";
 interface OutboundConnectorDefinition {
     name: string;
     type: string;
-    inputVariables?: string[]
+    inputVariables: string[]
 }
 
 const metadata = {
