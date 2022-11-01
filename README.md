@@ -53,7 +53,7 @@ class myDTO {
     type: "io.camunda:connector-1",
     inputVariables: ["auth", "lat", "long", "mightbe"]
 })
-class myFunction implements OutboundConnectorFunction {
+export class MyConnector implements OutboundConnectorFunction {
     async execute(context: OutboundConnectorContext) {
         const vars = context.getVariablesAsType(myDTO)
         context.validate(vars)
@@ -92,3 +92,13 @@ class myFunction implements OutboundConnectorFunction {
     }
 }
 ```
+To expose your connector for Connector Runtimes, in the `index.ts` of your module, export your connector class as `Connector`, like this:
+
+```typescript
+import { MyConnector } from "./lib/MyConnector"
+const Connector = MyConnector
+export Connector
+```
+
+This provides a normalised interface for Connector Runtimes to be able to load your connector by convention.
+

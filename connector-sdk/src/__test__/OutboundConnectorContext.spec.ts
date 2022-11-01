@@ -1,4 +1,4 @@
-import {Secret, OutboundConnector, OutboundConnectorFunction, OutboundConnectorContext, NotNull, BPMNError} from '../index'
+import {Secret, OutboundConnector, OutboundConnectorFunction, OutboundConnectorContext, NotNull} from '../index'
 
 class Data {
     @NotNull @Secret auth!: string
