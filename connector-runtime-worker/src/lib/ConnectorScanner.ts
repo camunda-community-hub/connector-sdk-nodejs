@@ -3,24 +3,18 @@ import fs from "fs"
 
 interface IConnectorScannerConfig {
     dir: string;
-    periodSec?: number;
     runtime: IWorkerConnectorRuntime
 }
 
 export class ConnectorScanner {
     dir: string;
-    periodSec?: number;
     runtime: IWorkerConnectorRuntime;
     seenConnectors: Set<string> = new Set();
 
     constructor(config: IConnectorScannerConfig) {
         this.dir = config.dir
-        const periodSec = config.periodSec ?? 0
         this.runtime = config.runtime
         module.paths.push(this.dir)
-        if (periodSec !== 0) {  
-            setInterval(() => this.scan(), periodSec * 1000)
-        } 
     }
 
     scan() {
