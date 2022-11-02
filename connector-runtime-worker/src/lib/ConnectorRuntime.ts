@@ -52,4 +52,8 @@ export class WorkerConnectorRuntime implements IWorkerConnectorRuntime {
             })
         }
     }
+
+    stop(): Promise<any>[] {
+        return Object.values(this.outboundWorkers).map(w => w.close())
+    }
 }
