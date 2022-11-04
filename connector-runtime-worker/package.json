@@ -1,5 +1,5 @@
 {
-  "name": "camunda-connector-runtime-worker",
+  "name": "camunda-connector-worker-runtime",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -18,7 +18,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "camunda-connector-sdk": "^1.0.3",
+    "camunda-connector-sdk": "^1.0.6",
     "zeebe-node": "^8.1.2"
   }
 }

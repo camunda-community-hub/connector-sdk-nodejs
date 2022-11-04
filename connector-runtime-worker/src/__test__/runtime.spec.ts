@@ -1,5 +1,7 @@
 import { NotNull, Secret, OutboundConnector, OutboundConnectorFunction, OutboundConnectorContext } from "camunda-connector-sdk";
 import { IZBClientMock, IZBWorkerMock, ICreateWorkerSig, WorkerConnectorRuntime } from "../lib/ConnectorRuntime";
+import { ConnectorScanner } from "../lib/ConnectorScanner";
+import { ConnectorRuntimeMock } from "./ConnectorRuntimeMock";
 
 class ZBClientMock implements IZBClientMock {
     workers: ZBWorkerMock[] = []
@@ -48,7 +50,7 @@ class Connector implements OutboundConnectorFunction {
     }
 }
 
-test('', async () => {
+test('Runtime calls connector', async () => {
     const zbc = new ZBClientMock()
     const r = new WorkerConnectorRuntime(zbc)
     await r.addOutboundConnector(Connector)
@@ -63,6 +65,19 @@ test('', async () => {
         }
 
     }
-    const res = zbc.workers[0].triggerTaskHandler(job)
+    const res = await zbc.workers[0].triggerTaskHandler(job)
     expect(res.connectorCalledWith?.lat).toBe(22)
+})
+
+test('ConnectorRuntime can get metadata from connector that was loaded from a distinct package hierarchy', () => {
+    const runtime = new ConnectorRuntimeMock()
+    const s = new ConnectorScanner({
+        dir: `${process.cwd()}/src/__test__/connectors`,
+        runtime 
+    })
+    s.scan()
+    expect(s.seenConnectors.has('camunda-8-connector-openweather-api')).toBe(true)
+    expect(runtime.outboundConnectors.length).toBe(1)
+    const md = runtime.extractMetadata()
+    expect(md.name).toBe("OpenWeatherAPI")
 })

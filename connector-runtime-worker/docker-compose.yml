@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  runtime:
+    volumes:
+     - ./__connectors__:/opt/connectors
+    image: sitapati/c8-connector-worker-runtime-nodejs:latest
+    environment:
+      - LOG_LEVEL=INFO
+      - ZEEBE_ADDRESS
+      - ZEEBE_CLIENT_ID
+      - ZEEBE_CLIENT_SECRET
+      - ZEEBE_AUTHORIZATION_SERVER_URL
+      - OPENWEATHER_API_KEY

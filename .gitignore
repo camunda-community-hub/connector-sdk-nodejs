@@ -1,4 +1,6 @@
 dist
+connector-runtime-worker/CamundaCloudMgmtAPI-Client-connector-sdk.txt
+.vscode
 
 # Logs
 logs

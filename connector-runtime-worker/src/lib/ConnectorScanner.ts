@@ -1,5 +1,6 @@
 import { IWorkerConnectorRuntime } from "./ConnectorRuntime";
 import fs from "fs"
+import { log } from "./log";
 
 interface IConnectorScannerConfig {
     dir: string;
@@ -20,16 +21,22 @@ export class ConnectorScanner {
     scan() {
         // scan a directory to find connectors
         const pkgFile = `${this.dir}/package.json`
+        log(`Scanning for: ${pkgFile}`)
         const exists = fs.existsSync(pkgFile);
-        if (exists) {
-            const pkg = JSON.parse(fs.readFileSync(pkgFile).toString())
-            const deps: {[key: string]: string} = pkg.dependencies
-            Object.keys(deps).forEach(key => {
-                const code = require(`${this.dir}/node_modules/${key}`)
-                const connector = code.Connector
-                this.runtime.addOutboundConnector(connector)
-                this.seenConnectors.add(key)
-            })
+        if (!exists) {
+            log(`File not found.`)
         }
+        log(`Found package.json`)
+        const pkg = JSON.parse(fs.readFileSync(pkgFile).toString())
+        const deps: {[key: string]: string} = pkg.dependencies
+        Object.keys(deps).forEach(key => {
+            const packagePath = `${this.dir}/node_modules/${key}`
+            log(`Loading ${key} from ${packagePath}`)
+            const code = require(packagePath)
+            const connector = code.Connector
+            this.runtime.addOutboundConnector(connector)
+            this.seenConnectors.add(key)
+        })
+    
     }
 }

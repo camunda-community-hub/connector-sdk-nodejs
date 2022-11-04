@@ -1,5 +1,6 @@
 import { ZBClient, ZBWorker, ZBWorkerTaskHandler } from "zeebe-node";
 import { BPMNError, getOutboundConnectorDescription, OutboundConnectorContext, OutboundConnectorFunction } from "camunda-connector-sdk"
+import { log } from "./log";
 
 type OutboundConnectorCtor = new (...args: any[]) => OutboundConnectorFunction
 
@@ -24,18 +25,28 @@ export class WorkerConnectorRuntime implements IWorkerConnectorRuntime {
 
     async addOutboundConnector(connectorConstructor: OutboundConnectorCtor) {
         const md = getOutboundConnectorDescription(connectorConstructor)
+        log("Adding Connector:")
+        log(md)
         const handler = new connectorConstructor();
         const w = this.zbc.createWorker({
             taskType: md.type,
             fetchVariable: md.inputVariables,
-            taskHandler: (job) => {
+            taskHandler: async (job) => {
                 const ctx = new OutboundConnectorContext({ job })
                 try {
-                    return job.complete(handler.execute(ctx) ?? undefined)
+                    log(`Executing handler for ${md.type}`)
+                    const res = (await handler.execute(ctx)) ?? {}
+                    log(`Completing job with variables`)
+                    log(res)
+                    return job.complete(res)
                 } catch (e: any) {
                     if (e instanceof BPMNError) {
+                        log(`Business error thrown in connector handler ${md.type}`)
+                        log(e.message)
                         return job.error(e.message)
                     }
+                    log(`Exception thrown in connector handler ${md.type}`)
+                    log(e)
                     return job.fail(e.message)
                 }
             }

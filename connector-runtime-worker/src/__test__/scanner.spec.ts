@@ -1,17 +1,5 @@
-import { OutboundConnectorFunction } from "camunda-connector-sdk"
-import { IWorkerConnectorRuntime } from "../lib/ConnectorRuntime"
 import { ConnectorScanner } from "../lib/ConnectorScanner"
-
-class ConnectorRuntimeMock implements IWorkerConnectorRuntime {
-    outboundConnectors: Set<OutboundConnectorFunction> = new Set()
-    addOutboundConnector(connector: new (...args: any[]) => OutboundConnectorFunction): void {
-        this.outboundConnectors.add(new connector())
-    }
-    removeOutboundConnector(name: string): void {
-        throw new Error("Method not implemented.")
-    }
-
-}
+import { ConnectorRuntimeMock } from "./ConnectorRuntimeMock"
 
 test('ConnectorScanner can detect and load connectors', () => {
     const runtime = new ConnectorRuntimeMock()
@@ -21,5 +9,5 @@ test('ConnectorScanner can detect and load connectors', () => {
     })
     s.scan()
     expect(s.seenConnectors.has('camunda-8-connector-openweather-api')).toBe(true)
-    expect(runtime.outboundConnectors.size).toBe(1)
+    expect(runtime.outboundConnectors.length).toBe(1)
 })

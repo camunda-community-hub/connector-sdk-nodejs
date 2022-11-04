@@ -102,3 +102,4 @@ export Connector
 
 This provides a normalised interface for Connector Runtimes to be able to load your connector by convention.
 
+For the Job Worker Connector Runtime see [connector-runtime-worker](./connector-runtime-worker/).
