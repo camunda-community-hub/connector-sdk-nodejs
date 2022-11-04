@@ -2,7 +2,7 @@ import "reflect-metadata";
 
 export type ReplaceSecretImplementation = (key: string) => string | undefined;
 
-const secret = Symbol("connector:secret")
+const secret = "connector:secret"
 
 export function Secret(target: any, propertyKey: string) {
     Reflect.defineMetadata(secret, "true", target, propertyKey)

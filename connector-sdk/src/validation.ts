@@ -1,4 +1,4 @@
-const notnull = Symbol("connector:notnull")
+const notnull = "connector:notnull"
 
 export function NotNull(target: any, propertyKey: string) {
     const requiredKeys = JSON.parse(Reflect.getMetadata(notnull, target) ?? '[]')
