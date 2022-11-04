@@ -68,7 +68,7 @@ services:
 
 - Add any environment variables that are needed for your connectors' secrets
 
-- Put your Camunda 8 API credentials in a file `.env` in the project.
+- Put your Camunda 8 API credentials and any connector secrets in a file `.env` in the project.
 
 - Run the Docker container with the following command:
 
