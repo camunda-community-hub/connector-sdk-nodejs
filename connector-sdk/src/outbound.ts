@@ -26,7 +26,7 @@ export function OutboundConnector(definition: OutboundConnectorDefinition) {
 }
 
 export abstract class OutboundConnectorFunction {
-    abstract execute(context: OutboundConnectorContext): {[key:string]: any} | void
+    abstract execute(context: OutboundConnectorContext): Promise<{[key:string]: any}> | {[key: string]: any} | void
 }
 
 export function getOutboundConnectorDescription(connector: Function): OutboundConnectorDefinition {
