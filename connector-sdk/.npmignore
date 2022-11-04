@@ -5,3 +5,4 @@ docs
 *.env
 .vscode
 .husky
+tsconfig*.json

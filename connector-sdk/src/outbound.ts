@@ -8,9 +8,9 @@ interface OutboundConnectorDefinition {
 }
 
 const metadata = {
-    name: Symbol("connector:name"),
-    type: Symbol("connector:type"),
-    inputVariables: Symbol("connector:inputVariables")
+    name: "connector:name",
+    type: "connector:type",
+    inputVariables: "connector:inputVariables"
 }
 
 /**
