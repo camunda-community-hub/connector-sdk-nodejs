@@ -7,7 +7,7 @@ To run your connectors using this runtime you have two options:
 * Wrapping your connector in code
 * Mounting your connector(s) into a Docker image
 
-## Wrapping your connector in code
+## Option 1: Wrapping your connector in code
 
 Install the connector runtime to your connector project:
 
@@ -28,9 +28,11 @@ runtime.addOutboundConnector(Connector)
 
 Put your Camunda 8 Connection credentials in the environment. The runtime uses the ZBClient zero-conf constructor.
 
-## Mount your connectors into a Docker image
+Set the environment variable `LOG_LEVEL=INFO` to get console logging. In a future release the log provider will become injectable.
 
-You can use a Docker image to run your connectors. 
+## Option 2: Mount your connectors into a Docker image
+
+You can use a Docker image of the Connector Runtime to run your connectors. 
 
 - Create a directory for the connectors, and initialise a `package.json`:
 
