@@ -4,7 +4,9 @@
 ![Compatible with: Camunda Platform 8](https://img.shields.io/badge/Compatible%20with-Camunda%20Platform%208-0072Ce)
 [![](https://img.shields.io/badge/Lifecycle-Incubating-blue)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#incubating-)
 
-This a pure Node.js implementation of the Camunda 8 Connector SDK. It is designed to follow the official Java SDK API ergonomics as closely as possible.
+**Note**: This is ***EXPERIMENTAL***. The [official Camunda (Java) SDK](https://github.com/camunda/connector-sdk) is still in active development, and this community SDK follows it. 
+
+This a community project - a pure Node.js implementation of the official Camunda 8 Connector SDK. It is designed to follow the official Java SDK API ergonomics as closely as possible. 
 
 Supports secret replacement and non-nullable (required) input process variables.
 
