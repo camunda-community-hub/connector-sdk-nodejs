@@ -10,6 +10,8 @@ This a community project - a pure Node.js implementation of the official Camunda
 
 Supports secret replacement and non-nullable (required) input process variables.
 
+For a tutorial in using this SDK to write a connector for Camunda 8, see [this article](https://medium.com/@sitapati/how-to-build-a-camunda-8-connector-using-the-node-js-sdk-5eb3d798f9ff).
+
 # Outbound Connector
 
 To create an outbound connector:
