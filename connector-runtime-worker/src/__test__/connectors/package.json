@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "camunda-8-connector-openweather-api": "1.0.3"
+    "camunda-8-connector-openweather-api": "1.0.4"
   }
 }
